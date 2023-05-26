@@ -7,11 +7,37 @@ import axios from 'axios'
 
 const Dash = () => {
 const [coins, setCoins] = useState([])
+const [user, setUser] = useState({})
+const [uid, setUid] = useState(null)
+const [loaded, setLoaded] = useState(false)
+const [favs, setFavs] = useState([])
+const destruct = []
+
+useEffect(() => {
+  axios.get('http://localhost:8000/api/getUser', { withCredentials: true })
+    .then(res => {
+      // console.log(res.data)
+      setUser(res.data)
+      setUid(res.data._id)
+      setFavs(res.data.favs)
+      setLoaded(true)
+    })
+    .catch(err => console.log(err))
+}, [])
+
+
+
+if (loaded) {
+  for (let i = 0; i < favs.length; i++) {
+    destruct.push(favs[i].id)
+  }
+  // console.log(destruct)
+}
 
 useEffect(() => {
   axios.get('https://api.coinlore.net/api/tickers/')
     .then(res => {
-      console.log(res.data.data)
+      // console.log(res.data.data)
       setCoins(res.data.data)
     })
     .catch(err => console.log(err))
@@ -22,15 +48,16 @@ useEffect(() => {
 
 
 
+
   return (
     <div style={{backgroundColor:'transparent'}} >
         <Nav/>
-        <div className='d-flex main m-5'>
+        <div className='d-flex main m-5' >
             <div className='perf flex1'>
-                <h2 className='text-center mb-5'>Today's Top Performers</h2>
+                <h2 className='text-center mb-5'>In The Green (24h)</h2>
                 <div className='border p-5'>
                   {
-                    coins.filter(coin => coin.percent_change_24h >= 2.5).map((coin, i) => {
+                    coins.filter(coin => coin.percent_change_24h > 0).map((coin, i) => {
                       return (
                         <div>
                           <div className='d-flex align-items-center gap-5 my-5'>
@@ -45,8 +72,19 @@ useEffect(() => {
             </div>
             <div className='mine flex1'>
                 <h2 className='text-center mb-5'>My Coins</h2>
-                <div>
-
+                <div className='border p-5'>
+                {
+                    coins.filter(coin => destruct.includes(coin.id) > 0).map((coin, i) => {
+                      return (
+                        <div>
+                          <div className='d-flex align-items-center gap-5 my-5'>
+                            <Link to={`/${coin.id}`} style={{textDecoration:'none'}}><h1>{coin.name}</h1></Link>
+                          </div>
+                          <hr />
+                        </div>
+                      )
+                    })
+                  }
                 </div>
             </div>
             <div>

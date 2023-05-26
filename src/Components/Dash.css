@@ -1,8 +1,8 @@
 .main{
-    display: flex;
-    justify-content: left;
-    gap: 400px;
-    margin-left: 100px;
+    /* display: flex; */
+    /* justify-content: left; */
+    gap: 200px;
+    /* margin-left: 100px; */
     background-color: transparent; 
 
 }
@@ -11,4 +11,5 @@
     background-color: transparent; 
     margin-left: 100px;
 }
+
 

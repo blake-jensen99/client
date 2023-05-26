@@ -39,7 +39,7 @@ const EH = () => {
                 </thead>
                 <tbody>
                     {
-                        adCoins.sort((a, b) => a.name.localeCompare(b.name)).filter(coin => coin.name[0] == "E" || coin.name[0] == "F" || coin.name[0] == "G" || coin.name[0] == "H").map((coin, i) => {
+                        adCoins.sort((a, b) => a.name.localeCompare(b.name)).filter(coin => coin.name[0] === "E" || coin.name[0] === "F" || coin.name[0] === "G" || coin.name[0] === "H").map((coin, i) => {
                             return (
                                 <tr>
                                     <td><h3 style={{ backgroundColor: 'transparent' }} className='ps-5'>{coin.name}</h3></td>

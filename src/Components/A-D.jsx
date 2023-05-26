@@ -39,7 +39,7 @@ const AD = () => {
             </thead>
             <tbody>
               {
-                adCoins.sort((a,b) => a.name.localeCompare(b.name)).filter(coin => coin.name[0] == "A" || coin.name[0] == "B" || coin.name[0] == "C" || coin.name[0] == "D").map((coin, i) => {
+                adCoins.sort((a,b) => a.name.localeCompare(b.name)).filter(coin => coin.name[0] === "A" || coin.name[0] === "B" || coin.name[0] === "C" || coin.name[0] === "D").map((coin, i) => {
                   return (
                     <tr>
                       <td><h3 style={{backgroundColor: 'transparent'}} className='ps-5'>{coin.name}</h3></td>
