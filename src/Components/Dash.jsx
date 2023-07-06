@@ -45,7 +45,7 @@ useEffect(() => {
 
 
 
-
+console.log(coins)
 
 
 
@@ -72,7 +72,7 @@ useEffect(() => {
             </div>
             <div className='mine flex1'>
                 <h2 className='text-center mb-5'>My Coins</h2>
-                <div className='border p-5'>
+                {destruct.length > 0? <div className='border p-5'>
                 {
                     coins.filter(coin => destruct.includes(coin.id) > 0).map((coin, i) => {
                       return (
@@ -85,7 +85,8 @@ useEffect(() => {
                       )
                     })
                   }
-                </div>
+                </div> : <h4>No Coins Saved</h4> }
+                
             </div>
             <div>
               <h2 className='text-center mb-5'>All Coins</h2>
